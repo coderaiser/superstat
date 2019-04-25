@@ -13,10 +13,9 @@ Smooth out differences between `stat` and `lstat`.
 
 ## Why?
 
-Symbolic link stat returned by `lstat.isDirectory()` is always false
-To know if a link is a directory we should call `stat.isDirectory()`
-`stat.isSymbolicLink()` [is always false](https://nodejs.org/dist/latest-v12.x/docs/api/fs.html#fs_stats_issymboliclink).
-
+- Symbolic link stat returned by `lstat.isDirectory()` is always `false`.
+- To know if a link is a directory we should call `stat.isDirectory()`.
+- `stat.isSymbolicLink()` [is always false](https://nodejs.org/dist/latest-v12.x/docs/api/fs.html#fs_stats_issymboliclink).
 ## Install
 ```
 npm i superstat
