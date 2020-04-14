@@ -1,0 +1,13 @@
+2020.04.14, v2.0.0
+
+feature:
+- (superstat) drop support of node < 10
+- (package) nyc v15.0.1
+- (package) nodemon v2.0.3
+- (package) eslint-plugin-putout v3.5.0
+- (package) eslint-plugin-node v11.1.0
+- (package) try-to-catch v3.0.0
+- (package) eslint v6.8.0
+- (package) putout v7.22.0
+- (package) madrun v5.4.5
+
