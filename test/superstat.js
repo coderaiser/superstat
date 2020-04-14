@@ -22,6 +22,14 @@ test('superstate: not symbolic link', async (t) => {
     t.end();
 });
 
+test('superstate: not symbolic link: name', async (t) => {
+    const {name} = await superstat(__filename);
+    const expected = 'superstat.js';
+    
+    t.equal(name, expected);
+    t.end();
+});
+
 test('superstate: symbolic link', async (t) => {
     const {stat, lstat} = fs.promises;
     
@@ -43,6 +51,32 @@ test('superstate: symbolic link', async (t) => {
     fs.promises.lstat = lstat;
     
     t.ok(newlStat.called, 'should call lstat');
+    t.end();
+});
+
+test('superstate: symbolic link', async (t) => {
+    const {stat, lstat} = fs.promises;
+    
+    const newStat = stub().returns({
+        isDirectory() {},
+    });
+    
+    const newlStat = stub().returns({
+        isSymbolicLink: () => true,
+    });
+    
+    fs.promises.stat = newStat;
+    fs.promises.lstat = newlStat;
+    
+    const superstat = reRequire('..');
+    const result = await superstat(__filename);
+    
+    fs.promises.stat = stat;
+    fs.promises.lstat = lstat;
+    
+    const expected = 'superstat.js';
+    
+    t.equal(result.name, expected);
     t.end();
 });
 
