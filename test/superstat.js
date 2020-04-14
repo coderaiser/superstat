@@ -16,35 +16,31 @@ test('superstate: no args', async (t) => {
 });
 
 test('superstate: not symbolic link', async (t) => {
-    const {stat, lstat} = fs;
     const data = await superstat(__filename);
-    
-    fs.stat = stat;
-    fs.lstat = lstat;
     
     t.ok(data, 'should return stat');
     t.end();
 });
 
 test('superstate: symbolic link', async (t) => {
-    const {stat, lstat} = fs;
+    const {stat, lstat} = fs.promises;
     
-    const newStat = stub((name, fn) => fn(null, {
-        isDirectory: function() {},
-    }));
+    const newStat = stub().returns({
+        isDirectory() {},
+    });
     
-    const newlStat = stub((name, fn) => fn(null, {
-        isSymbolicLink: () => true
-    }));
+    const newlStat = stub().returns({
+        isSymbolicLink: () => true,
+    });
     
-    fs.stat = newStat;
-    fs.lstat = newlStat;
+    fs.promises.stat = newStat;
+    fs.promises.lstat = newlStat;
     
     const superstat = reRequire('..');
     await superstat(__filename);
     
-    fs.stat = stat;
-    fs.lstat = lstat;
+    fs.promises.stat = stat;
+    fs.promises.lstat = lstat;
     
     t.ok(newlStat.called, 'should call lstat');
     t.end();

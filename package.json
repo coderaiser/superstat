@@ -36,7 +36,7 @@
   "license": "MIT",
   "main": "lib/superstat.js",
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=10"
   },
   "devDependencies": {
     "@cloudcmd/stub": "^2.3.1",
