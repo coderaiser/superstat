@@ -1,3 +1,9 @@
+2020.04.14, v2.0.1
+
+fix:
+- (superstat) add ability to return name
+
+
 2020.04.14, v2.0.0
 
 feature:
